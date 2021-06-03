@@ -139,7 +139,7 @@ if __name__ == '__main__':
 
     # Reshape reconciled forecasts to put back into original DataFrame shape
     basef = basef.set_index('Unnamed: 0')
-    rec = np.reshape(reconciled, (-1, basef.shape[1]))
+    reconciled = np.reshape(reconciled, (-1, basef.shape[1]))
 
     reconciled_df = pd.DataFrame(data=reconciled[0:, 0:],
                                  index=basef.index,
