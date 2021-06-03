@@ -3,8 +3,8 @@ import pandas as pd
 import hts
 
 
-def ctfr(basef: np.ndarray,
-         m: int):
+def octrec(basef: np.ndarray,
+           m: int):
     hts = hts_tools()
 
     tmp = thf_tools(m)
@@ -134,8 +134,8 @@ def commutation_matrix_sp(r, n):
 
 if __name__ == '__main__':
     basef = pd.read_csv('basef.csv')
-    reconciled = ctfr(basef=basef.to_numpy()[0:, 1:],
-                      m=12)
+    reconciled = octrec(basef=basef.to_numpy()[0:, 1:],
+                        m=12)
 
     # Reshape reconciled forecasts to put back into original DataFrame shape
     basef = basef.set_index('Unnamed: 0')
