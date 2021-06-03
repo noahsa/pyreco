@@ -24,4 +24,4 @@ jobs:
       - name: Run all tests
         run: |
           poetry install
-          poetry run python pytest
+          poetry run python -m pytest --cov ctfr
