@@ -1,5 +1,5 @@
 import collections
-from typing import Dict, List
+from typing import OrderedDict, List
 
 import numpy as np
 import pandas as pd
@@ -51,7 +51,7 @@ def _octrec(basef: np.ndarray,
     return reconciled
 
 
-def octrec(forecasts: collections.OrderedDict[pd.DataFrame],
+def octrec(forecasts: collections.OrderedDict[str, pd.DataFrame],
            summing_matrix: np.ndarray,
            m: int,
            kset: List[int] = None
@@ -173,7 +173,7 @@ def commutation_matrix_sp(r: int,
     return K
 
 
-def to_matrix_format(forecasts: collections.OrderedDict[pd.DataFrame]):
+def to_matrix_format(forecasts: collections.OrderedDict[str, pd.DataFrame]):
     basef = pd.concat([v.T for k,v in forecasts.items()],
                       axis=1,
                       join='inner')
