@@ -7,7 +7,6 @@ From here, you can navigate to:
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    api
 
