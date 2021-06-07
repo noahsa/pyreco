@@ -32,9 +32,25 @@ def test_foreco_example(foreco_data):
 
     reconciled = np.reshape(reconciled, (-1, foreco_data.shape[1]))
 
-    reconciled_df = pd.DataFrame(data=reconciled[0:, 0:],
+    reconciled = pd.DataFrame(data=reconciled[0:, 0:],
                                  index=foreco_data.index,
                                  columns=foreco_data.columns)
+
+    # Check temporal coherence
+    yearly_forecast = (reconciled['k12_h1']).values
+    semiannual_forecast = (reconciled['k6_h1'] + reconciled['k6_h2']).values
+    triannual_forecast = (reconciled['k4_h1'] + reconciled['k4_h2'] + reconciled['k4_h3']).values
+    quarterly_forecast = (reconciled['k3_h1'] + reconciled['k3_h2'] + reconciled['k3_h3'] + reconciled['k3_h4']).values
+    bimonthly_forecast = (reconciled['k2_h1'] + reconciled['k2_h2'] + reconciled['k2_h3'] + \
+                          reconciled['k2_h4'] + reconciled['k2_h5'] + reconciled['k2_h6']).values
+    monthly_forecast = (reconciled['k1_h1'] + reconciled['k1_h2'] + reconciled['k1_h3'] + reconciled['k1_h4'] + \
+                       reconciled['k1_h5'] + reconciled['k1_h6'] + reconciled['k1_h7'] + reconciled['k1_h8'] + \
+                       reconciled['k1_h9'] + reconciled['k1_h10'] + reconciled['k1_h11'] + reconciled['k1_h12']).values
+    numpy.testing.assert_almost_equal(yearly_forecast, semiannual_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, triannual_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, quarterly_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, bimonthly_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, monthly_forecast)
 
 
 def test_all_frequencies(yearly_forecasts, semiannual_forecasts,
