@@ -4,6 +4,7 @@ import pyreco.pyreco
 import hts.functions
 import numpy as np
 import pandas as pd
+import numpy.testing
 
 
 def test_get_divisors():
@@ -69,7 +70,21 @@ def test_all_frequencies(yearly_forecasts, semiannual_forecasts,
     reconciled = pyreco.pyreco.octrec(forecasts=forecasts,
                                       m=12,
                                       summing_matrix=sum_mat)
-    reconciled
+    # Check temporal coherence
+    yearly_forecast = (reconciled['2020-Y1']).values
+    semiannual_forecast = (reconciled['2020-S1'] + reconciled['2020-S2']).values
+    triannual_forecast = (reconciled['2020-T1'] + reconciled['2020-T2'] + reconciled['2020-T3']).values
+    quarterly_forecast = (reconciled['2020-Q1'] + reconciled['2020-Q2'] + reconciled['2020-Q3'] + reconciled['2020-Q4']).values
+    bimonthly_forecast = (reconciled['2020-B1'] + reconciled['2020-B2'] + reconciled['2020-B3'] + \
+                          reconciled['2020-B4'] + reconciled['2020-B5'] + reconciled['2020-B6']).values
+    monthly_forecast = (reconciled['2020-01'] + reconciled['2020-02'] + reconciled['2020-03'] + reconciled['2020-04'] + \
+                       reconciled['2020-05'] + reconciled['2020-06'] + reconciled['2020-07'] + reconciled['2020-08'] + \
+                       reconciled['2020-09'] + reconciled['2020-10'] + reconciled['2020-11'] + reconciled['2020-12']).values
+    numpy.testing.assert_almost_equal(yearly_forecast, semiannual_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, triannual_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, quarterly_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, bimonthly_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, monthly_forecast)
 
 
 
@@ -103,4 +118,12 @@ def test_less_frequencies(yearly_forecasts, quarterly_forecasts, monthly_forecas
                                       m=12,
                                       summing_matrix=sum_mat,
                                       kset=kset)
-    reconciled
+
+    # Check temporal coherence
+    yearly_forecast = (reconciled['2020-Y1']).values
+    quarterly_forecast = (reconciled['2020-Q1'] + reconciled['2020-Q2'] + reconciled['2020-Q3'] + reconciled['2020-Q4']).values
+    monthly_forecast = (reconciled['2020-01'] + reconciled['2020-02'] + reconciled['2020-03'] + reconciled['2020-04'] + \
+                       reconciled['2020-05'] + reconciled['2020-06'] + reconciled['2020-07'] + reconciled['2020-08'] + \
+                       reconciled['2020-09'] + reconciled['2020-10'] + reconciled['2020-11'] + reconciled['2020-12']).values
+    numpy.testing.assert_almost_equal(yearly_forecast, quarterly_forecast)
+    numpy.testing.assert_almost_equal(yearly_forecast, monthly_forecast)
