@@ -2,10 +2,10 @@
 API
 ###
 
-foreco.foreco
+pyreco.pyreco
 ==============
 
-.. automodule:: foreco.foreco
+.. automodule:: pyreco.pyreco
    :members:
    :undoc-members:
    :show-inheritance:
