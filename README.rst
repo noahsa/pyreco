@@ -1,4 +1,4 @@
-pyreco
+Pyreco
 ======
 
 A library for Cross-Temporal Forecast Reconciliation.
