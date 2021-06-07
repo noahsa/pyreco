@@ -1,5 +1,7 @@
-Cross-Temporal Forecast Reconciliation
-=======================================
+pyreco
+======
+
+A library for Cross-Temporal Forecast Reconciliation.
 
 Python implementation of R's `FoReco <https://github.com/daniGiro/FoReco>`_ package.
 

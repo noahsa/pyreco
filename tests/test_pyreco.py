@@ -1,13 +1,13 @@
 import collections
 
-import ctfr.ctfr
+import pyreco.pyreco
 import hts.functions
 import numpy as np
 import pandas as pd
 
 
 def test_get_divisors():
-    output = ctfr.ctfr.get_divisors(12)
+    output = pyreco.pyreco.get_divisors(12)
 
 
     expected_output = [1, 2, 3, 4, 6, 12]
@@ -23,9 +23,9 @@ def test_foreco_example(foreco_data):
 
     basef = foreco_data.to_numpy()[0:, 1:]
 
-    reconciled = ctfr.ctfr._octrec(basef=basef,
-                                   m=12,
-                                   summing_matrix=summing_matrix)
+    reconciled = pyreco.pyreco._octrec(basef=basef,
+                                       m=12,
+                                       summing_matrix=summing_matrix)
 
     foreco_data = foreco_data.set_index('Unnamed: 0')
 
@@ -66,9 +66,9 @@ def test_all_frequencies(yearly_forecasts, semiannual_forecasts,
                                          'monthly_forecasts': monthly_forecasts
                                         })
 
-    reconciled = ctfr.ctfr.octrec(forecasts=forecasts,
-                                  m=12,
-                                  summing_matrix=sum_mat)
+    reconciled = pyreco.pyreco.octrec(forecasts=forecasts,
+                                      m=12,
+                                      summing_matrix=sum_mat)
     reconciled
 
 
@@ -99,8 +99,8 @@ def test_less_frequencies(yearly_forecasts, quarterly_forecasts, monthly_forecas
                                         })
 
     kset = [1, 4, 12]
-    reconciled = ctfr.ctfr.octrec(forecasts=forecasts,
-                                  m=12,
-                                  summing_matrix=sum_mat,
-                                  kset=kset)
+    reconciled = pyreco.pyreco.octrec(forecasts=forecasts,
+                                      m=12,
+                                      summing_matrix=sum_mat,
+                                      kset=kset)
     reconciled

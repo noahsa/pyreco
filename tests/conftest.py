@@ -1,4 +1,4 @@
-import ctfr.datasets
+import pyreco.datasets
 import pandas as pd
 import pytest
 
@@ -55,4 +55,4 @@ def monthly_forecasts():
 
 @pytest.fixture(scope='session')
 def foreco_data():
-    return ctfr.datasets.load_foreco()
+    return pyreco.datasets.load_foreco()
