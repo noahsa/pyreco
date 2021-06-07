@@ -2,10 +2,10 @@
 API
 ###
 
-ctfr.ctfr
-==========
+foreco.foreco
+==============
 
-.. automodule:: ctfr.ctfr
+.. automodule:: foreco.foreco
    :members:
    :undoc-members:
    :show-inheritance:
