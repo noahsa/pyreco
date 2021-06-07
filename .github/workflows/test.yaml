@@ -19,10 +19,30 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python }}
+
       - name: Install poetry
         run: pip install poetry
+
       - name: Run all tests
         run: |
           poetry install
           cd tests
-          poetry run python -m pytest --cov ctfr
+          poetry run python -m pytest --cov pyreco
+
+      - name: Statistics
+        if: success()
+        run: |
+          pip install coverage
+          coverage report
+          coverage xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        if: always()
+        continue-on-error: true
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage.xml
+          flags: cpu,pytest
+          name: CPU-coverage
+          fail_ci_if_error: false
