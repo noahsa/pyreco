@@ -5,6 +5,10 @@ Pyreco
   :target: https://pyreco.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
 
+.. image:: https://codecov.io/gh/noahsa/pyreco/branch/master/graph/badge.svg?token=Y1RKIZ2714
+  :target: https://codecov.io/gh/noahsa/pyreco
+  :alt: Code Coverage
+
 
 A library for Cross-Temporal Forecast Reconciliation.
 
